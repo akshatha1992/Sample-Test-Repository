@@ -3,17 +3,25 @@ node {
     {
         git url: 'https://github.com/akshatha1992/Sample-Test-Repository.git'
     }
-   stage('Two') {
-			steps 
-			{
-				input('In pipeline, We take decision. Can we proceed?')
-			}
-		}
-		stage('Three') 
-		{
-			steps 
-			{
-				echo "Running Stage Three"
-			}
-		}
+   stage('Initital Setup') 
+   {
+	steps 
+	{
+	input('In pipeline, We take decision. Can we proceed?')
+	}
+    }
+     stage('Execution') 
+     {
+	steps 
+	{
+	echo "Execution process"
+	}
+    }
+    stage('Report') 
+     {
+	steps 
+	{
+	echo "Reports"
+	}
+    }
   }
