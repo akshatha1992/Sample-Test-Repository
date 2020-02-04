@@ -1,4 +1,20 @@
 node {
     stage('Clone sources') {
         git url: 'https://github.com/akshatha1992/Sample-Test-Repository.git'
-    }}
+    }
+   stage('Two') {
+			steps {
+				input('In pipeline, We take decision. Can we proceed?')
+			}
+		}
+		stage('Three') {
+			steps {
+				echo "Running Stage Three"
+			}
+		}
+		stage('Four') {       
+			steps {
+			echo "Running another test job"
+			}        
+		} 
+  }
