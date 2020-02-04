@@ -1,4 +1,6 @@
-node {
+pipeline {
+    agent any
+    stages {
     stage('Clone sources')
     {
         git url: 'https://github.com/akshatha1992/Sample-Test-Repository.git'
@@ -24,4 +26,5 @@ node {
 	echo "Reports"
 	}
     }
+  }
   }
