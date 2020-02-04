@@ -14,7 +14,8 @@ pipeline {
         }
         stage ('Execution') {
             steps {
-                echo "Execution process"
+                echo "PATH = ${PATH}"
+                echo "Java_HOME = ${JAVA_HOME}"
             }
         }
         stage ('Report') {
