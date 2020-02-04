@@ -1,30 +1,32 @@
 pipeline {
     agent any
+
     stages {
-    stage('Clone sources')
-    {
-        git url: 'https://github.com/akshatha1992/Sample-Test-Repository.git'
+        stage ('Clone') {
+            steps {
+                git url: 'https://github.com/akshatha1992/Sample-Test-Repository.git'
+            }
+        }
+        stage ('Exec Go run') {
+            steps {
+                rtGoRun (
+                    path: "golang-example/hello",
+                    resolverId: "GO_RESOLVER",
+                    args: "build"
+                )
+            }
+        }
+
+        stage ('Exec Go publish') {
+            steps {
+                rtGoPublish (
+                    path: "golang-example/hello",
+                    deployerId: "GO_DEPLOYER",
+                    version: "1.0.0"
+                )
+            }
+        }
+
+        
     }
-   stage('Initital Setup') 
-   {
-	steps 
-	{
-	input('In pipeline, We take decision. Can we proceed?')
-	}
-    }
-     stage('Execution') 
-     {
-	steps 
-	{
-	echo "Execution process"
-	}
-    }
-    stage('Report') 
-     {
-	steps 
-	{
-	echo "Reports"
-	}
-    }
-  }
-  }
+}
