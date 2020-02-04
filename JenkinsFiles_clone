@@ -7,23 +7,19 @@ pipeline {
                 git url: 'https://github.com/akshatha1992/Sample-Test-Repository.git'
             }
         }
-        stage ('Exec Go run') {
+        stage ('Initital Setup') {
             steps {
-                rtGoRun (
-                    path: "golang-example/hello",
-                    resolverId: "GO_RESOLVER",
-                    args: "build"
-                )
+                input('In pipeline, We take decision. Can we proceed?')
             }
         }
-
-        stage ('Exec Go publish') {
+        stage ('Execution') {
             steps {
-                rtGoPublish (
-                    path: "golang-example/hello",
-                    deployerId: "GO_DEPLOYER",
-                    version: "1.0.0"
-                )
+                echo "Execution process"
+            }
+        }
+        stage ('Report') {
+            steps {
+                echo "Report Details"
             }
         }
 
