@@ -1,5 +1,30 @@
-node {
-	stage ('Build'){
-    	 echo "C:\Program Files (x86)\ojdkbuild\java-1.8.0-openjdk-1.8.0.222-2\jre\bin\java" -jar PipelineSeleniumDemo.jar"
-       }
+pipeline {
+    agent any
+
+    stages {
+        stage ('Clone') {
+            steps {
+                git url: 'https://github.com/akshatha1992/Sample-Test-Repository.git'
+            }
+        }
+        stage ('Initital Setup') {
+            steps {
+                input('In pipeline, We take decision. Can we proceed?')
+            }
+        }
+        stage ('Execution') {
+            steps {
+                echo "PATH = ${PATH}"
+                echo "Java_HOME = ${JAVA_HOME}"
+		echo "C:\Program Files (x86)\ojdkbuild\java-1.8.0-openjdk-1.8.0.222-2\jre\bin\java -jar PipelineSeleniumDemo.jar"
+            }
+        }
+        stage ('Report') {
+            steps {
+                echo "Report Details"
+            }
+        }
+
+        
+    }
 }
