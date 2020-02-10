@@ -13,13 +13,20 @@ pipeline {
                 input('In pipeline, We take decision. Can we proceed?')
             }
         }
-        stage ('Execution_Part1') {
+        stage ('Get Java Home Path') {
             steps {
                 echo "PATH = ${PATH}"
                 echo "Java_HOME = ${JAVA_HOME}"
             }
         }
-	stage ('Execution Selenium Script') {
+	 
+	stage ('Execute Selenium Script from Git Repo ') {
+            steps {
+                bat label: '', script: 'executeTest.bat'
+            }
+        }
+	
+	stage ('Execution Selenium Script from Local Machine') {
 	    steps 
 	    {
 	   bat label: '', script: '''cd C:\\Jenkins\\SampleDemo
