@@ -22,8 +22,13 @@ pipeline {
 	stage ('Execution Selenium Script') {
 	    steps 
 	    {
+	    ''' this .bat file which is placed in Git repository '''
+	     bat label: '', script: 'executeTest.bat'
+	     
+	    ''' we have commented below code because it is running from local machine
 	   bat label: '', script: '''cd C:\\Jenkins\\SampleDemo
-"C:\\Program Files (x86)\\ojdkbuild\\java-1.8.0-openjdk-1.8.0.222-2\\jre\\bin\\java" -jar "PipelineSeleniumDemo.jar"'''
+	  "C:\\Program Files (x86)\\ojdkbuild\\java-1.8.0-openjdk-1.8.0.222-2\\jre\\bin\\java" -jar "PipelineSeleniumDemo.jar"'''
+	  '''
 	    }
         }
         stage ('Report') {
