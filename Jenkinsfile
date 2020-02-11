@@ -1,24 +1,31 @@
-pipeline { 
-    agent any 
-    options {
-        skipStagesAfterUnstable()
-    }
+pipeline {
+
+    agent any
+
     stages {
-        stage('Build') { 
-            steps { 
-                sh 'make' 
-            }
-        }
-        stage('Test'){
+        stage ('Initital Setup') {
             steps {
-                sh 'make check'
-                junit 'reports/**/*.xml' 
+                input('In pipeline, We take decision. Can we proceed?')
             }
         }
-        stage('Deploy') {
+        stage ('Get Java Home Path') {
             steps {
-                sh 'make publish'
+                echo "PATH = ${PATH}"
+                echo "Java_HOME = ${JAVA_HOME}"
             }
         }
+	 
+	stage ('Execute Selenium Script from Git Repo ') {
+            steps {
+                bat label: '', script: 'executeTest.bat'
+            }
+        }
+        stage ('Report') {
+            steps {
+                echo "Report Details"
+            }
+        }
+
+        
     }
 }
