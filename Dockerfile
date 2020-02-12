@@ -1,9 +1,8 @@
-FROM java:7
-
+FROM java
 WORKDIR /
 
-ADD HelloWorld.jar HelloWorld.jar
+ADD PipelineSeleniumDemo.jar PipelineSeleniumDemo.jar
 
 EXPOSE 8080
 
-CMD java -jar executeTest.bat
+CMD java -jar PipelineSeleniumDemo.jar
