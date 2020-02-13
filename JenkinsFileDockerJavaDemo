@@ -6,19 +6,19 @@ pipeline {
     stages {
         stage ('Docker Build Images') {
             steps {
-                echo ${dockerImage}
-                bat label: '', script: 'docker build -f Dockerfile -t ${dockerImage} .'
+                bat label: '', script: '''echo \'${dockerImage}\'
+                docker build -f Dockerfile -t \'${dockerImage}\' .'''
             }
         }
        
         stage ('Docker Run') {
             steps {
-                bat label: '', script: 'docker run ${dockerImage}'
+                bat label: '', script: 'docker run \'${dockerImage}\''
             }
         }
         stage ('Remove Image') {
             steps {
-                bat label: '', script: 'docker rmi ${dockerImage}'
+                bat label: '', script: 'docker rmi \'${dockerImage}\''
             }
         }
 
