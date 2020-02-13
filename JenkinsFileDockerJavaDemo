@@ -1,26 +1,31 @@
-def dockerImage = "hello-world-image-" + "$BUILD_NUMBER"
+def var1 = "hello-world-image-" + "$BUILD_NUMBER"
 pipeline {
  
     agent any
 
     stages {
-        stage ('Docker Build Images') {
+        stage ('Get iamgename') {
             steps {
-                bat label: '', script: '''echo ${dockerImage}
-docker build -f Dockerfile -t ${dockerImage} .'''
+                echo "$var1"
+            }
+        }
+        
+       ''' stage ('Docker Image Build') {
+            steps {
+                bat label: '', script: 'docker build -f Dockerfile -t hello-world-image .'
             }
         }
        
         stage ('Docker Run') {
             steps {
-                bat label: '', script: 'docker run \'${dockerImage}\''
+                bat label: '', script: 'docker run hello-world-image'
             }
         }
         stage ('Remove Image') {
             steps {
-                bat label: '', script: 'docker rmi \'${dockerImage}\''
+                bat label: '', script: 'docker rmi hello-world-image'
             }
-        }
+        }'''
 
         
     }
