@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage ('Docker Build Images') {
             steps {
-                echo dockerImage
+                echo docker build -f Dockerfile -t "hello-world-image"+"$BUILD_NUMBER"
                 bat label: '', script: 'docker build -f Dockerfile -t "hello-world-image"+"$BUILD_NUMBER" .'
             }
         }
