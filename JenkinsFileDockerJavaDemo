@@ -21,7 +21,7 @@ environment {
             steps 
                 {
                 script {
-                       dockerImage = docker.build "hello-world-image" + ":$BUILD_NUMBER"
+                       dockerImage = docker.build "hello-world-image"
                        }
 
                 }
@@ -31,7 +31,17 @@ environment {
             {
             steps 
                 {
-                bat label: '', script: 'docker run $var2:$BUILD_NUMBER'
+                bat label: '', script: 'docker run hello-world-image'
+
+
+                }
+            }
+            
+            stage ('Remove Container') 
+            {
+            steps 
+                {
+                bat label: '', script: 'docker rmi -force hello-world-image'
 
 
                 }
