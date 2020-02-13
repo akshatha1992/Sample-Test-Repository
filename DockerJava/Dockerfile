@@ -1,8 +1,8 @@
 FROM java
 WORKDIR /
 
-ADD PipelineSeleniumDemo.jar PipelineSeleniumDemo.jar
+ADD JavaDemo.jar JavaDemo.jar
 
 EXPOSE 8080
 
-CMD java -jar PipelineSeleniumDemo.jar
+CMD java -jar JavaDemo.jar
