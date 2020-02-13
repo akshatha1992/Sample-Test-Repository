@@ -11,18 +11,18 @@ pipeline {
         stage ('Docker Build Images') {
             steps {
                 echo dockerImage
-                bat label: '', script: 'docker build -f Dockerfile -t hello-world-image .'
+                bat label: '', script: 'docker build -f Dockerfile -t $dockerImage .'
             }
         }
        
         stage ('Docker Run') {
             steps {
-                bat label: '', script: 'docker run hello-world-image'
+                bat label: '', script: 'docker run $dockerImage'
             }
         }
         stage ('Remove Image') {
             steps {
-                bat label: '', script: 'docker rmi hello-world-image'
+                bat label: '', script: 'docker rmi $dockerImage'
             }
         }
 
