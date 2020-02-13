@@ -31,7 +31,7 @@ environment {
             steps 
                 {
                 script {
-                       docker.run(dockerImage)
+                       isExecuted = docker.run "hello-world-image" + ":$BUILD_NUMBER"
                        }
 
 
