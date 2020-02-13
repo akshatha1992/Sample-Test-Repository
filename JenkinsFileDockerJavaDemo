@@ -14,14 +14,27 @@ environment {
             }
         }
         
-        stage ('Docker Image Build') {
-            steps {
+        stage ('Docker Image Build') 
+            {
+            steps 
+                {
                 script {
                        dockerImage = docker.build "hello-world-image" + ":$BUILD_NUMBER"
                        }
 
+                }
             }
-        }
+            
+       stage ('Execute Test In Container') 
+            {
+            steps 
+                {
+                script {
+                       dockerImage.run()
+                       }
+
+                }
+            }
         
        
         
