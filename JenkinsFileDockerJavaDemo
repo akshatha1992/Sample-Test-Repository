@@ -1,5 +1,9 @@
-def var1 = "hello-world-image-" + "$BUILD_NUMBER"
+def var1 = "hello-world-image"
 pipeline {
+environment {
+    dockerImage = ''
+  }
+
  
     agent any
 
@@ -12,7 +16,10 @@ pipeline {
         
         stage ('Docker Image Build') {
             steps {
-                bat label: '', script: 'docker build -f Dockerfile -t \"${var1}\" .'
+                script {
+                       dockerImage = docker.build "hello-world-image" + ":$BUILD_NUMBER"
+                       }
+
             }
         }
         
