@@ -1,0 +1,24 @@
+pipeline {
+
+    agent any
+
+    stages {
+        stage ('Docker Build Images') {
+            steps {
+                bat label: '', script: 'docker build -f Dockerfile -t hello-world-image .'
+            }
+        }
+        stage ('Docker Run') {
+            steps {
+                bat label: '', script: 'docker run hello-world-image'
+            }
+        }
+        stage ('Report') {
+            steps {
+                echo "Report Details"
+            }
+        }
+
+        
+    }
+}
