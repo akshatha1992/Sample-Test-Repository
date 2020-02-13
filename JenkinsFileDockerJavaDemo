@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage ('Docker Build Images') {
             steps {
-                bat label: '', script: '''echo \'${dockerImage}\'
-                docker build -f Dockerfile -t \'${dockerImage}\' .'''
+                bat label: '', script: '''echo ${dockerImage}
+docker build -f Dockerfile -t ${dockerImage} .'''
             }
         }
        
