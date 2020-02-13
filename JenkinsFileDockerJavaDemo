@@ -30,7 +30,7 @@ environment {
             steps 
                 {
                 script {
-                       dockerImage.run()
+                       dockerImage.run
                        }
 
                 }
