@@ -31,9 +31,7 @@ environment {
             {
             steps 
                 {
-                script {
-                       'docker run $var2:$BUILD_NUMBER'
-                       }
+                bat label: '', script: 'docker run $var2:$BUILD_NUMBER'
 
 
                 }
