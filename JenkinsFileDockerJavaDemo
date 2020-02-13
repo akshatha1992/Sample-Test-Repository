@@ -1,26 +1,22 @@
 pipeline {
-    environment {
-    ImageID = ''
-  }
-
+ 
     agent any
 
     stages {
         stage ('Docker Build Images') {
             steps {
-                bat label: '', script: '''docker build -f Dockerfile -t hello-world-image .
-                $ImageID=docker images hello-world-image --format="{{.ID}}"'''
+                bat label: '', script: 'docker build -f Dockerfile -t hello-world-image+ ":$BUILD_NUMBER" .'
             }
         }
        
         stage ('Docker Run') {
             steps {
-                bat label: '', script: 'docker run hello-world-image'
+                bat label: '', script: 'docker run hello-world-image+ ":$BUILD_NUMBER"'
             }
         }
         stage ('Remove Image') {
             steps {
-                bat label: '', script: 'docker rmi  $ImageID'
+                bat label: '', script: 'docker rmi  hello-world-image+ ":$BUILD_NUMBER"'
             }
         }
 
