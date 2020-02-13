@@ -5,18 +5,18 @@ pipeline {
     stages {
         stage ('Docker Build Images') {
             steps {
-                bat label: '', script: 'docker build -f Dockerfile -t hello-world-image+ ":$BUILD_NUMBER" .'
+                bat label: '', script: 'docker build -f Dockerfile -t hello-world-image .'
             }
         }
        
         stage ('Docker Run') {
             steps {
-                bat label: '', script: 'docker run hello-world-image+ ":$BUILD_NUMBER"'
+                bat label: '', script: 'docker run hello-world-image'
             }
         }
         stage ('Remove Image') {
             steps {
-                bat label: '', script: 'docker rmi  hello-world-image+ ":$BUILD_NUMBER"'
+                bat label: '', script: 'docker rmi hello-world-image'
             }
         }
 
