@@ -2,6 +2,7 @@ def var1 = "hello-world-image"
 pipeline {
 environment {
     dockerImage = ''
+    isExecuted = ''
   }
 
  
@@ -30,7 +31,7 @@ environment {
             steps 
                 {
                 script {
-                       docker.run "hello-world-image" + ":$BUILD_NUMBER"
+                       docker.run dockerImage
                        }
 
 
