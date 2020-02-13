@@ -13,6 +13,13 @@ pipeline {
         }
       }
     }
+    stage('Run Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            "docker run ${dockerImage}"
+          }
+        }
     stage('Deploy Image') {
       steps{
         script {
