@@ -29,9 +29,7 @@ environment {
             {
             steps 
                 {
-                script {
-                       dockerImage.run
-                       }
+                bat label: '', script: 'docker run \"hello-world-image\" + \":$BUILD_NUMBER\"'
 
                 }
             }
