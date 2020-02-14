@@ -22,10 +22,16 @@ pipeline {
         }
       }
     }
-    stage('Remove Unused docker image') {
+    stage('docker run') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        bat label: '', script: 'docker run $registry:$BUILD_NUMBER'
       }
     }
+   ''' stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+        bat label: '', script: 'docker rmi $registry:$BUILD_NUMBER'
+      }
+    }'''
   }
 }
