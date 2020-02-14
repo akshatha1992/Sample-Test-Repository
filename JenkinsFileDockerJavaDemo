@@ -1,53 +1,31 @@
-def var1 = "hello-world-image"
 pipeline {
-environment {
-    dockerImage = ''
-    isExecuted = ''
-    var2 = "hello-world-image"
-  }
-
- 
-    agent any
-
-    stages {
-        stage ('Get iamgename') {
-            steps {
-                echo "$var1"
-            }
-        }
-        
-        stage ('Docker Image Build') 
-            {
+  agent any
+  stages {
+    stage('Build Docker Image') {
+      steps{
             steps 
-                {
-                script {
-                       dockerImage = docker.build "hello-world-image"
-                       }
-
-                }
-            }
-            
-       stage ('Execute Test In Container') 
-            {
-            steps 
-                {
-                bat label: '', script: 'docker run hello-world-image'
-
-
-                }
-            }
-            
-            stage ('Remove Container') 
-            {
-            steps 
-                {
-                bat label: '', script: 'docker rmi -force hello-world-image'
-
-
-                }
-            }
-        
-       
-        
+              {
+                bat label: '', script: 'docker build -f Dockerfile -t Sample-java-image .'
+              }
+      }
     }
+    stage('Docker Run'){
+      steps{
+           steps 
+              {
+                bat label: '', script: 'docker run Sample-java-image'
+              }
+         }
+      }
+    stage('Remove Image') {
+      steps{
+        steps 
+              {
+                bat label: '', script: 'docker rmi --force Sample-java-image'
+              }
+        }
+      }
+      
+    }
+  }
 }
