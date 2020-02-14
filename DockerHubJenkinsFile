@@ -13,18 +13,13 @@ pipeline {
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Deploy Image into Docker Hub') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
-      }
-    }
-    stage('docker run') {
-      steps{
-        bat label: '', script: 'docker run $registry:$BUILD_NUMBER'
       }
     }
     
