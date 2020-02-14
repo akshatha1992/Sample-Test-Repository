@@ -2,29 +2,22 @@ pipeline {
   agent any
   stages {
     stage('Build Docker Image') {
-      steps{
             steps 
               {
                 bat label: '', script: 'docker build -f Dockerfile -t Sample-java-image .'
               }
       }
-    }
     stage('Docker Run'){
-      steps{
            steps 
               {
                 bat label: '', script: 'docker run Sample-java-image'
               }
          }
-      }
     stage('Remove Image') {
-      steps{
         steps 
               {
                 bat label: '', script: 'docker rmi --force Sample-java-image'
               }
         }
-      }
-      
    }
 }
