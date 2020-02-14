@@ -1,1 +1,37 @@
-dcdc
+pipeline {
+environment {
+    registry = "akshathadocker/dockerhub_pipeline_repository"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+    dockername="SampleJava"
+  }
+  agent any
+  stages {
+    stage('Build Docker Image') {
+            steps 
+              {
+                dockerImage = docker.build dockername + ":$BUILD_NUMBER"
+              }
+      }
+    stage('Docker Run'){
+           steps 
+              {
+               docker.withRegistry( '', registryCredential ) {
+               dockerImage.push()
+
+              }
+         }
+    stage('Run Image') {
+        steps 
+              {
+                bat label: '', script: 'docker run dockerImage'
+              }
+        }
+        stage('Remove unused Docker Image') {
+        steps 
+              {
+                bat label: '', script: 'docker rmi --force $dockername:$BUILD_NUMBER'
+              }
+        }
+   }
+}
