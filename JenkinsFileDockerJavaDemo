@@ -4,19 +4,19 @@ pipeline {
     stage('Build Docker Image') {
             steps 
               {
-                bat label: '', script: 'docker build -f Dockerfile -t Sample-java-image .'
+                bat label: '', script: 'docker build -f Dockerfile -t sample-java-image .'
               }
       }
     stage('Docker Run'){
            steps 
               {
-                bat label: '', script: 'docker run Sample-java-image'
+                bat label: '', script: 'docker run sample-java-image'
               }
          }
     stage('Remove Image') {
         steps 
               {
-                bat label: '', script: 'docker rmi --force Sample-java-image'
+                bat label: '', script: 'docker rmi --force sample-java-image'
               }
         }
    }
