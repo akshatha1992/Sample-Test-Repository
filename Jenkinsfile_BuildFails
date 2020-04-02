@@ -1,0 +1,36 @@
+pipeline {
+    stages {
+        stage('stage 1') {
+            steps {
+                 bat label: '', script: 'executeTest.bat'
+            }
+        }
+        stage('stage 2') {
+            steps {
+                script{ 
+                    echo "PATH = ${PATH}"
+                    echo "Java_HOME = ${JAVA_HOME}"
+                }
+            }
+            post{
+                success {
+                }
+                failure {
+                    script{
+                        
+						input('Build is failure. Can we proceed?')
+                        error "Failed, exiting now..."
+                    }
+                }
+                aborted {
+                }
+                unstable {
+                    script{
+                           input('Build is unstable Can we proceed?')
+                          error "Unstable, exiting now..."                    
+                     }
+                }
+            }
+        }
+    }
+}
