@@ -25,7 +25,25 @@ pipeline {
                 echo "Report Details"
             }
         }
-
+	post{
+                success {
+                }
+                failure {
+                    script{
+                        
+						input('Build is failure. Can we proceed?')
+                        error 'failed to execute'
+                    }
+                }
+                aborted {
+                }
+                unstable {
+                    script{
+                           input('Build is unstable Can we proceed?')
+                          error 'unstable to execute'                 
+                     }
+                }
+            }
         
     }
 }
