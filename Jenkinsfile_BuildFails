@@ -1,36 +1,31 @@
 pipeline {
+
+    agent any
+
     stages {
-        stage('stage 1') {
+        stage ('Initital Setup') {
             steps {
-                 bat label: '', script: 'executeTest.bat'
+                input('In pipeline, We take decision. Can we proceed?')
             }
         }
-        stage('stage 2') {
+        stage ('Get Java Home Path') {
             steps {
-                script{ 
-                    echo "PATH = ${PATH}"
-                    echo "Java_HOME = ${JAVA_HOME}"
-                }
-            }
-            post{
-                success {
-                }
-                failure {
-                    script{
-                        
-						input('Build is failure. Can we proceed?')
-                        error "Failed, exiting now..."
-                    }
-                }
-                aborted {
-                }
-                unstable {
-                    script{
-                           input('Build is unstable Can we proceed?')
-                          error "Unstable, exiting now..."                    
-                     }
-                }
+                echo "PATH = ${PATH}"
+                echo "Java_HOME = ${JAVA_HOME}"
             }
         }
+	 
+	stage ('Execute Selenium Script from Git Repo ') {
+            steps {
+                bat label: '', script: 'executeTest.bat'
+            }
+        }
+        stage ('Report') {
+            steps {
+                echo "Report Details"
+            }
+        }
+
+        
     }
 }
